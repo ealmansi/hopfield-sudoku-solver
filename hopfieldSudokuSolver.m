@@ -1,7 +1,7 @@
 % script parameters
-sudokuSize = 2;
+sudokuSize = 3;
 verbose = false;
-itCount = 100000;
+itCount = 500000;
 Tp = 1;									% system temperature
 alfa = ((10^-3)/(Tp))^(1/itCount);		% rate of cooling
 
