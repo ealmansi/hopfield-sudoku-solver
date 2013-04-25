@@ -1,7 +1,7 @@
 % script parameters
-sudokuSize = 2;
+sudokuSize = 3;
 verbose = false;
-itCount = 100000;
+itCount = 500000;
 Tp = 1;									% system temperature
 alfa = ((10^-3)/(Tp))^(1/itCount);		% rate of cooling
 
@@ -14,7 +14,7 @@ m = size(A,2);
 T = -2 * (A * A' - 4 * eye(n));
 Ib = - 4 * ones(n,1);
 
-% init state vector "v" with random values between 0-1
+% init state vector "v" with random values 0-1
 v = round(rand(n,1));
 
 
