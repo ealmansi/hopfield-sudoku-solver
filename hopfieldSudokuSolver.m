@@ -9,6 +9,7 @@ m_ext = n + m;
 assert(rank(A_ext) == size(A_ext,1));
 
 % script parameters
+verbose = false;
 itCount = 100000;
 c = 0;
 Tp = 100;
@@ -41,17 +42,17 @@ for it=1:itCount
 	% compute neuron's input
 	ui = T(i,:) * v + Ib(i);
 
-	% update it's output in terms of the system's temp (Tp)
+	% update it's output in terms of its input and the system's temp (Tp)
 	v(i) = 1/(1 + exp(-ui / Tp));
 
 	% decrease Tp geometrically
 	Tp = Tp * alfa;
 
-	% optional: display E(v)
-	% Ev = - 1/2 * v' * T * v - v' * Ib
-
-	% optional: display distance to feasability
-	% dist = norm(v - (Tval * v + Ival))
+	% optional: display E(v) & display distance to feasability
+	if( verbose )
+		Ev = - 1/2 * v' * T * v - v' * Ib
+		dist = norm(v - (Tval * v + Ival))
+	end
 end
 
 exactCover2Sudoku(sudokuSize, v(1:m))
