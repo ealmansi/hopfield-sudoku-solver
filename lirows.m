@@ -1,5 +1,9 @@
 function [Xsub,idx]=lirows(X,tol)
-%Extract a linearly independent set of columns of a given matrix X
+%
+% Taken from: http://www.mathworks.com/matlabcentral/answers/49984
+% Author: Matt J (link: http://www.mathworks.com/matlabcentral/answers/contributors/1440443-matt-j)
+%
+%Extract a linearly independent set of rows of a given matrix X
 %
 %    [Xsub,idx]=lirows(X)
 %
@@ -10,10 +14,10 @@ function [Xsub,idx]=lirows(X,tol)
 %
 %out:
 %
-% Xsub: The extracted columns of X
-% idx:  The indices (into X) of the extracted columns
+% Xsub: The extracted rows of X
+% idx:  The indices (into X) of the extracted rows
     X = X';
-     if ~nnz(X) %X has no non-zeros and hence no independent columns
+     if ~nnz(X) %X has no non-zeros and hence no independent rows
          Xsub=[]; idx=[];
          return
      end
