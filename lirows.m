@@ -16,21 +16,25 @@ function [Xsub,idx]=lirows(X,tol)
 %
 % Xsub: The extracted rows of X
 % idx:  The indices (into X) of the extracted rows
-    X = X';
-     if ~nnz(X) %X has no non-zeros and hence no independent rows
-         Xsub=[]; idx=[];
-         return
-     end
-     if nargin<2, tol=1e-10; end
-       [Q, R, E] = qr(X,0); 
-       if ~isvector(R)
-        diagr = abs(diag(R));
-       else
-        diagr = R(1);   
-       end
-       %Rank estimation
-       r = find(diagr >= tol*diagr(1), 1, 'last'); %rank estimation
-       idx=sort(E(1:r));
-       Xsub=X(:,idx);
 
-       Xsub = Xsub';
+permutation = randperm(size(X,1));
+X = X(permutation,:);
+X = X';
+if ~nnz(X) %X has no non-zeros and hence no independent rows
+   Xsub=[]; idx=[];
+   return
+end
+if nargin<2, tol=1e-10; end
+[Q, R, E] = qr(X,0); 
+if ~isvector(R)
+diagr = abs(diag(R));
+else
+diagr = R(1);   
+end
+%Rank estimation
+r = find(diagr >= tol*diagr(1), 1, 'last'); %rank estimation
+idx=sort(E(1:r));
+Xsub=X(:,idx);
+
+Xsub = Xsub';
+idx = permutation(idx);
